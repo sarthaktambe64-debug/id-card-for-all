@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ADYPU Card on Desk Photo</title>
+  <style>
+    :root {
+      --card-w: 54mm;
+      --card-h: 85.6mm;
+      --card-radius: 3.2mm;
+      --ink: #111215;
+      --blue: #123e70;
+      --red: #b32724;
+      --line-red: #c03333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 768px;
+      height: 1024px;
+      overflow: hidden;
+    }
+
+    body {
+      background: url('assets/desk-background.jpg') center center / cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Ambient lighting overlay reflecting the real room light */
+    .room-lighting {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 40% 30%, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.06) 100%);
+      pointer-events: none;
+    }
+
+    .scaler {
+      transform: rotate(1.2deg) scale(2.45);
+      transform-origin: center center;
+    }
+
+    /* Outer wrapper providing 3D physical PVC card shadow & cast shadow onto the desk */
+    .card-wrap {
+      position: relative;
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: var(--card-radius);
+      box-shadow:
+        0 1px 3px rgba(0,0,0,0.14),
+        4px 8px 16px rgba(0,0,0,0.26),
+        10px 22px 38px rgba(0,0,0,0.22),
+        18px 36px 65px rgba(0,0,0,0.18);
+    }
+
+    /* THE PHYSICAL CR80 PVC CARD */
+    .id-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse at 35% 25%, #ffffff 0%, #faf8f5 55%, #f3eee7 100%);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      color: var(--ink);
+      user-select: none;
+      /* Plastic edge bevel */
+      border: 0.28mm solid rgba(0, 0, 0, 0.12);
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.9),
+        inset 0 -1px 1.5px rgba(0,0,0,0.14),
+        inset 1px 0 1px rgba(255,255,255,0.8),
+        inset -1px 0 1px rgba(0,0,0,0.12);
+    }
+
+    /* Layer 1: Subtle surface noise & PVC card texture */
+    .pvc-texture {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0);
+      background-size: 3px 3px;
+      opacity: 0.35;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+      z-index: 12;
+    }
+
+    /* Layer 2: Real-life surface scratches from wallet / pocket wear */
+    .card-scratches {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, transparent 48%, rgba(255,255,255,0.35) 49%, rgba(0,0,0,0.06) 50%, transparent 51%),
+        linear-gradient(28deg, transparent 65%, rgba(255,255,255,0.22) 66%, rgba(0,0,0,0.05) 67%, transparent 68%),
+        linear-gradient(172deg, transparent 32%, rgba(255,255,255,0.25) 33%, rgba(0,0,0,0.04) 34%, transparent 35%),
+        linear-gradient(85deg, transparent 80%, rgba(255,255,255,0.3) 81%, rgba(0,0,0,0.06) 82%, transparent 83%);
+      opacity: 0.65;
+      pointer-events: none;
+      z-index: 13;
+      mix-blend-mode: overlay;
+    }
+
+    /* Layer 3: Plastic glossy laminate reflection */
+    .plastic-sheen {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(125deg,
+          rgba(255,255,255,0.38) 0%,
+          rgba(255,255,255,0.18) 22%,
+          transparent 38%,
+          rgba(255,255,255,0.08) 60%,
+          transparent 75%
+        );
+      pointer-events: none;
+      z-index: 14;
+    }
+
+    /* Layer 4: Pocket edge grime / subtle patina around perimeter */
+    .edge-patina {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--card-radius);
+      box-shadow:
+        inset 0 0 2.5mm rgba(120, 95, 75, 0.08),
+        inset 0 0 1mm rgba(0, 0, 0, 0.06);
+      pointer-events: none;
+      z-index: 15;
+    }
+
+    /* Card Content with real thermal ink print quality */
+    .card-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      filter: contrast(0.98) brightness(0.99);
+    }
+
+    /* Crest (softened like re-transfer print) */
+    .card-crest {
+      position: absolute;
+      top: 2.2mm;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18.0mm;
+      height: 13.5mm;
+      object-fit: contain;
+      object-position: center top;
+      filter: drop-shadow(0 0.15mm 0.2mm rgba(0,0,0,0.06));
+    }
+
+    /* Motto */
+    .card-motto {
+      position: absolute;
+      top: 16.8mm;
+      left: 1mm;
+      width: calc(100% - 2mm);
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 5.25pt;
+      letter-spacing: -0.05px;
+      color: #1e1e22;
+      white-space: nowrap;
+    }
+
+    /* Brand Header: AJEENKYA */
+    .card-brand {
+      position: absolute;
+      top: 19.5mm;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      font-size: 15.6pt;
+      line-height: 1;
+      letter-spacing: 1.05mm;
+      color: var(--red);
+      text-transform: uppercase;
+      text-shadow: 0 0.1mm 0.15mm rgba(179,39,36,0.15);
+    }
+
+    /* School Title */
+    .card-school {
+      position: absolute;
+      top: 26.2mm;
+      left: 1mm;
+      width: calc(100% - 2mm);
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      font-size: 8.2pt;
+      line-height: 1.1;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    /* Approval & Affiliation */
+    .card-approval {
+      position: absolute;
+      top: 31.0mm;
+      left: 1.5mm;
+      width: calc(100% - 3mm);
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 5.65pt;
+      line-height: 1;
+      color: #1c1c20;
+      white-space: nowrap;
+    }
+
+    /* Student Portrait Frame (with realistic photo border & print texture) */
+    .card-photo-box {
+      position: absolute;
+      top: 35.2mm;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18.0mm;
+      height: 22.8mm;
+      border: 0.38mm solid #111215;
+      background: #e7ecf2;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0.3mm 0.6mm rgba(0,0,0,0.12);
+    }
+
+    .card-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+      filter: contrast(1.04) brightness(0.97) saturate(1.05);
+    }
+
+    /* Student Full Name */
+    .card-student-name {
+      position: absolute;
+      top: 59.2mm;
+      left: 2mm;
+      right: 2mm;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 800;
+      font-size: 8.5pt;
+      line-height: 1.1;
+      color: var(--ink);
+      white-space: nowrap;
+      letter-spacing: -0.1px;
+    }
+
+    /* Student Details Block */
+    .card-details {
+      position: absolute;
+      top: 63.3mm;
+      left: 4.8mm;
+      right: 4.8mm;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55mm;
+      text-align: left;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: baseline;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      font-size: 7.3pt;
+      line-height: 1.22;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .detail-label {
+      width: 12.8mm;
+      display: flex;
+      justify-content: space-between;
+      padding-right: 1.8mm;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .detail-value {
+      font-weight: 700;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: clip;
+    }
+
+    /* Divider Line */
+    .card-divider {
+      position: absolute;
+      top: 78.4mm;
+      left: 3.2mm;
+      right: 3.2mm;
+      height: 0.28mm;
+      background: var(--line-red);
+      opacity: 0.92;
+    }
+
+    /* Barcode Section */
+    .card-barcode-wrap {
+      position: absolute;
+      top: 79.2mm;
+      left: 4.2mm;
+      right: 4.2mm;
+      height: 5.3mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .barcode-svg {
+      width: 100%;
+      height: 100%;
+      shape-rendering: crispEdges;
+      opacity: 0.94;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="room-lighting"></div>
+
+  <div class="scaler">
+    <div class="card-wrap">
+      <article class="id-card" id="card">
+        
+        <!-- Texture & Wear Layers -->
+        <div class="pvc-texture"></div>
+        <div class="card-scratches"></div>
+        <div class="plastic-sheen"></div>
+        <div class="edge-patina"></div>
+
+        <!-- Main Card Content -->
+        <div class="card-content">
+          <!-- Crest -->
+          <img class="card-crest" src="assets/ady-patil-crest-cropped.png" alt="Crest">
+
+          <!-- Motto -->
+          <div class="card-motto">"Empowerment through quality technical education"</div>
+
+          <!-- Brand -->
+          <div class="card-brand">AJEENKYA</div>
+
+          <!-- School -->
+          <div class="card-school">DY Patil School of Engineering</div>
+
+          <!-- Accreditation -->
+          <div class="card-approval">Approved by AICTE, DTE &amp; Affiliated to SPPU</div>
+
+          <!-- Photo -->
+          <div class="card-photo-box">
+            <img class="card-photo" src="assets/sample-student-photo.jpg" alt="Student Photo">
+          </div>
+
+          <!-- Student Name -->
+          <div class="card-student-name">Tambe Sarthak Mahesh</div>
+
+          <!-- Details -->
+          <div class="card-details">
+            <div class="detail-row">
+              <span class="detail-label"><span>Branch</span><span>:</span></span>
+              <span class="detail-value">Diploma Computer Engg</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label"><span>Class</span><span>:</span></span>
+              <span class="detail-value">FY-SEM-IV</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label"><span>Year</span><span>:</span></span>
+              <span class="detail-value">2026-2027</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label"><span>UID</span><span>:</span></span>
+              <span class="detail-value">DEN23244564</span>
+            </div>
+          </div>
+
+          <!-- Red Divider Line -->
+          <div class="card-divider"></div>
+
+          <!-- Barcode -->
+          <div class="card-barcode-wrap" id="barcodeContainer"></div>
+        </div>
+
+      </article>
+    </div>
+  </div>
+
+  <script>
+    const CODE128_PATTERNS = [
+      '212222','222122','222221','121223','121322','131222','122213','122312','132212','221213',
+      '221312','231212','112232','122132','122231','113222','123122','123221','223211','221132',
+      '221231','213212','223112','312131','311222','321122','321221','312212','322112','322211',
+      '212123','212321','232121','111323','131123','131321','112313','132113','132311','211313',
+      '231113','231311','112133','112331','132131','113123','113321','133121','313121','211331',
+      '231131','213113','213311','213131','311123','311321','331121','312113','312311','332111',
+      '314111','221411','431111','111224','111422','121124','121421','141122','141221','112214',
+      '112412','122114','122411','142112','142211','241211','221114','413111','241112','134111',
+      '111242','121142','121241','114212','124112','124211','411212','421112','421211','212141',
+      '214121','412121','111143','111341','131141','114113','114311','411113','411311','113141',
+      '114131','311141','411131','211412','211214','211232','2331112'
+    ];
+
+    function generateCode128Svg(text) {
+      const cleanText = text.trim();
+      const codes = [104];
+      let sum = 104;
+      for (let i = 0; i < cleanText.length; i++) {
+        const val = cleanText.charCodeAt(i) - 32;
+        codes.push(val);
+        sum += val * (i + 1);
+      }
+      codes.push(sum % 103);
+      codes.push(106);
+
+      const patternStr = codes.map(c => CODE128_PATTERNS[c]).join('');
+      let totalModules = 0;
+      for (let i = 0; i < patternStr.length; i++) totalModules += parseInt(patternStr[i], 10);
+
+      const quietZone = 8;
+      const fullWidth = totalModules + (quietZone * 2);
+      const height = 48;
+
+      let rects = [];
+      let curX = quietZone;
+      let isBar = true;
+
+      for (let i = 0; i < patternStr.length; i++) {
+        const w = parseInt(patternStr[i], 10);
+        if (isBar) {
+          rects.push(`<rect x="${curX}" y="0" width="${w}" height="${height}" fill="#111318" />`);
+        }
+        curX += w;
+        isBar = !isBar;
+      }
+
+      return `<svg class="barcode-svg" viewBox="0 0 ${fullWidth} ${height}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        ${rects.join('')}
+      </svg>`;
+    }
+
+    document.getElementById('barcodeContainer').innerHTML = generateCode128Svg('DEN23244564');
+  </script>
+</body>
+</html>

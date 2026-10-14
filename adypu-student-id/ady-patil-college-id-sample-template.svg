@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 540 856" width="540" height="856">
+  <defs>
+    <clipPath id="cardClip">
+      <rect x="0" y="0" width="540" height="856" rx="32" ry="32"/>
+    </clipPath>
+    <style>
+      .motto { font-family: Georgia, "Times New Roman", serif; font-size: 17.5px; font-style: italic; font-weight: 700; fill: #1c1b1d; }
+      .brand { font-family: Georgia, "Times New Roman", serif; font-size: 51px; font-weight: 700; letter-spacing: 7.5px; fill: #b92b27; }
+      .school { font-family: Georgia, "Times New Roman", serif; font-size: 29.5px; font-weight: 700; fill: #0f3b73; }
+      .approval { font-family: Georgia, "Times New Roman", serif; font-size: 18.5px; font-style: italic; font-weight: 700; fill: #1c1b1d; }
+      .name { font-family: Arial, Helvetica, sans-serif; font-size: 32px; font-weight: 800; fill: #060709; }
+      .detail-lbl { font-family: Arial, Helvetica, sans-serif; font-size: 24.5px; font-weight: 800; fill: #08090c; }
+      .detail-colon { font-family: Arial, Helvetica, sans-serif; font-size: 24.5px; font-weight: 800; fill: #08090c; }
+      .detail-val { font-family: Arial, Helvetica, sans-serif; font-size: 24.5px; font-weight: 800; fill: #08090c; }
+    </style>
+  </defs>
+
+  <!-- Background White Card Surface with Rounded Corners -->
+  <rect x="0" y="0" width="540" height="856" rx="32" ry="32" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <g clip-path="url(#cardClip)">
+    <!-- 1. Official Crest (Eagle, Sun, Elephants, Banner) -->
+    <image href="assets/ady-patil-crest-cropped.png" x="175" y="24" width="190" height="138" preserveAspectRatio="xMidYMin meet"/>
+
+    <!-- 2. Tagline / Motto -->
+    <text class="motto" x="270" y="180" text-anchor="middle">"Empowerment through quality technical education"</text>
+
+    <!-- 3. Primary Header: AJEENKYA -->
+    <text class="brand" x="270" y="228" text-anchor="middle">AJEENKYA</text>
+
+    <!-- 4. College: DY Patil School of Engineering -->
+    <text class="school" x="270" y="271" text-anchor="middle">DY Patil School of Engineering</text>
+
+    <!-- 5. Accreditation: Approved by AICTE, DTE & Affiliated to SPPU -->
+    <text class="approval" x="270" y="310" text-anchor="middle">Approved by AICTE, DTE &amp; Affiliated to SPPU</text>
+
+    <!-- 6. Student Portrait Frame & Photo -->
+    <g transform="translate(182, 344)">
+      <rect x="0" y="0" width="176" height="226" fill="#edf2f7" stroke="#0a0b0d" stroke-width="3.5"/>
+      <image href="assets/sample-student-photo.jpg" x="2" y="2" width="172" height="222" preserveAspectRatio="xMidYMid slice"/>
+    </g>
+
+    <!-- 7. Full Student Name -->
+    <text class="name" x="270" y="608" text-anchor="middle">Tambe Sarthak Mahesh</text>
+
+    <!-- 8. Student Details Block (Aligned labels, colons, and values) -->
+    <g transform="translate(48, 646)">
+      <!-- Row 1: Branch -->
+      <text class="detail-lbl" x="0" y="0">Branch</text>
+      <text class="detail-colon" x="98" y="0">:</text>
+      <text class="detail-val" x="116" y="0">Diploma Computer Engg</text>
+
+      <!-- Row 2: Class -->
+      <text class="detail-lbl" x="0" y="38">Class</text>
+      <text class="detail-colon" x="98" y="38">:</text>
+      <text class="detail-val" x="116" y="38">FY-SEM-IV</text>
+
+      <!-- Row 3: Year (2026-2027) -->
+      <text class="detail-lbl" x="0" y="76">Year</text>
+      <text class="detail-colon" x="98" y="76">:</text>
+      <text class="detail-val" x="116" y="76">2026-2027</text>
+
+      <!-- Row 4: UID -->
+      <text class="detail-lbl" x="0" y="114">UID</text>
+      <text class="detail-colon" x="98" y="114">:</text>
+      <text class="detail-val" x="116" y="114">DEN23244564</text>
+    </g>
+
+    <!-- 9. Crisp Crimson Divider Line -->
+    <line x1="28" y1="780" x2="512" y2="780" stroke="#c63737" stroke-width="2.6"/>
+
+    <!-- 10. Real Scannable Code 128 Barcode for UID DEN23244564 -->
+    <g id="barcode-bars">
+    <rect x="55.00" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="63.27" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="71.54" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="85.32" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="90.83" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="104.62" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="115.64" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="126.67" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="134.94" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="145.96" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="151.47" y="794" width="8.27" height="48" fill="#08090b"/>
+    <rect x="168.01" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="176.28" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="187.31" y="794" width="8.27" height="48" fill="#08090b"/>
+    <rect x="201.09" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="206.60" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="217.63" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="223.14" y="794" width="8.27" height="48" fill="#08090b"/>
+    <rect x="236.92" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="247.95" y="794" width="8.27" height="48" fill="#08090b"/>
+    <rect x="261.73" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="267.24" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="278.27" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="286.54" y="794" width="8.27" height="48" fill="#08090b"/>
+    <rect x="297.56" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="308.59" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="316.86" y="794" width="8.27" height="48" fill="#08090b"/>
+    <rect x="327.88" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="336.15" y="794" width="8.27" height="48" fill="#08090b"/>
+    <rect x="349.94" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="358.21" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="369.23" y="794" width="8.27" height="48" fill="#08090b"/>
+    <rect x="380.26" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="388.53" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="399.55" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="407.82" y="794" width="8.27" height="48" fill="#08090b"/>
+    <rect x="418.85" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="432.63" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="440.90" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="449.17" y="794" width="5.51" height="48" fill="#08090b"/>
+    <rect x="462.95" y="794" width="8.27" height="48" fill="#08090b"/>
+    <rect x="473.97" y="794" width="2.76" height="48" fill="#08090b"/>
+    <rect x="479.49" y="794" width="5.51" height="48" fill="#08090b"/>
+    </g>
+  </g>
+</svg>
